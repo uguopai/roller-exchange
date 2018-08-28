@@ -80,12 +80,30 @@ class Account extends AccountController {
 	public function authentication(){
         $this->load->library('GoogleAuthenticator');
         $ga = new GoogleAuthenticator();
-        $user = $this->db->get_where("account",["id" => $this->session->userdata("is_login")])->row();
+        $user = $this->db->get_where("account",["api_validate_id" => $this->session->userdata("is_login")])->row();
+        if(!$user){
+        	$getinfo = $this->apis->post("account/info");
+        	$this->db->insert("account",["api_validate_id" => $getinfo->user_id, "email" => $getinfo->email]);
+        	$user = $this->db->get_where("account",["api_validate_id" => $this->session->userdata("is_login")])->row();
+        }
+        
         $email = $user->email;
         $actived_2fa = ($user->validate_f2a_code == null || $user->validate_f2a_code == "")? false : true;
 		
-        if ($this->input->post("security") == 1) {
-            $secret = $this->input->post("secret");
+       
+
+        $secret = $ga->createSecret();
+        $qrCodeUrl = $ga->getQRCodeGoogleUrl("RollerExchange:".$email, $secret, 'roller-exchange');
+
+		return $this->view("account/authentication",["secret" => $secret, "qrCodeUrl" => $qrCodeUrl, "actived_2fa" => $actived_2fa]);
+	}
+
+
+	public function enable_f2a(){
+		$this->load->library('GoogleAuthenticator');
+        $ga = new GoogleAuthenticator();
+
+			$secret = $this->input->post("secret");
             $verification_code = $this->input->post("verification_code");
 
             if ($secret == "")
@@ -97,7 +115,7 @@ class Account extends AccountController {
             if ($ga->verifyCode($secret, $verification_code, 2)) {
                 $ciphertext = encrypt_decrypt("encrypt",$secret);
 
-                $data = $this->db->update("account",["validate_f2a_code" => $ciphertext],["id" => $this->session->userdata("is_login")]);
+                $data = $this->db->update("account",["validate_f2a_code" => $ciphertext],["api_validate_id" => $this->session->userdata("is_login")]);
 
                 if ($data) {
                     $this->flash("success", "Kích hoạt 2FA thành công");
@@ -110,13 +128,22 @@ class Account extends AccountController {
                 $this->flash("error", "Sai mã xác thực.");
                 redirect(store_url('account/authentication'));
             }
-        } else if ($this->input->post("security") == 2) {
-            $verification_code = $this->input->post("verification_code");
+	}
+
+	public function disable_f2a(){
+		$this->load->library('GoogleAuthenticator');
+        $ga = new GoogleAuthenticator();
+        $user = $this->db->get_where("account",["api_validate_id" => $this->session->userdata("is_login")])->row();
+        if(!$user){
+        	$this->flash("error", 'Có lỗi xảy ra, vui lòng thử lại.');
+            redirect(store_url('account/authentication'));
+        }
+		$verification_code = $this->input->post("verification_code");
             $ciphertext = $user->validate_f2a_code;
             $secret = encrypt_decrypt("decrypt", $ciphertext);
 
             if ($ga->verifyCode($secret, $verification_code, 2)) {
-                $data = $this->db->update("account",["validate_f2a_code" => ""],["id" => $this->session->userdata("is_login")]);
+                $data = $this->db->update("account",["validate_f2a_code" => ""],["api_validate_id" => $this->session->userdata("is_login")]);
 
                 if($data)
                 {
@@ -134,14 +161,7 @@ class Account extends AccountController {
                 $this->flash("error", 'Có lỗi xảy ra, vui lòng thử lại.');
                 redirect(store_url('account/authentication'));
             }
-        }
-
-        $secret = $ga->createSecret();
-        $qrCodeUrl = $ga->getQRCodeGoogleUrl($email, $secret, 'roller-exchange');
-
-		return $this->view("account/authentication",["secret" => $secret, "qrCodeUrl" => $qrCodeUrl, "actived_2fa" => $actived_2fa]);
 	}
-
 
 	/*
 	referrals

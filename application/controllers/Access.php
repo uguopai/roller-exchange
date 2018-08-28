@@ -79,7 +79,7 @@ class Access extends AccessController {
 
             $this->load->library('GoogleAuthenticator');
             $ga = new GoogleAuthenticator();
-            $user = $this->db->get_where("account",["id" => $this->session->userdata("is_login")])->row();
+            $user = $this->db->get_where("account",["api_validate_id" => $this->session->userdata("is_login")])->row();
             $ciphertext = $user->validate_f2a_code;
             $secret = encrypt_decrypt("decrypt", $ciphertext);
 

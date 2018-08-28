@@ -23,7 +23,8 @@
               </h4>
           </div>
           <div class="card-text">
-              <form method="post" style="padding-left: 20px" action="<?php echo store_url("account/authentication");?>">
+              
+                <?php echo form_open(store_url("account/".(!$actived_2fa ? "enable_f2a" : "disable_f2a")));?>
                   <?php
                   if (!$actived_2fa)
                   {

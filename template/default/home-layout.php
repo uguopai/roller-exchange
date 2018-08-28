@@ -108,6 +108,7 @@
 	</nav>
 </header>
 	<main ruller="main" class="container-fluid">
+		<?php echo $flash;?>
 		<?php print_r($content);?>
 	</main>
 	<footer>
