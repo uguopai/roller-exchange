@@ -23,7 +23,7 @@ class Access extends AccessController {
 		$email = $this->input->post("email");
 		$password = $this->input->post("password");
 		$data = $this->apis->post("public/login",["email" => $email, "password" => $password]);
-
+        
 		if($data){
 			if(isset($data->id) && intval($data->id) > 0){
 			    $user = $this->db->get_where("account",["id" => $data->id])->row();
