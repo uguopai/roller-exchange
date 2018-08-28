@@ -122,7 +122,7 @@ class BaseController extends CI_Controller{
 
 	public function api_setup(){
 		
-		$config['server'] = "https://api.btcrip.co/api/";
+		$config['server'] = "http://localhost:4444/api/";
 		$config['send_cookies'] = "";
 		$config['api_name'] = "";
 		$config['api_key'] = "";

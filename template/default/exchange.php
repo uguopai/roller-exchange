@@ -242,6 +242,8 @@
 		$(".sell-task").animate({scrollTop: $(".sell-task").get(0).scrollHeight}, 500);
 		getDataJson();
 		
+		$("input.amcharts-start-date-input").parent().hide();
+		$('[href="http://www.amcharts.com"]').hide();
 		
 		
 	});
@@ -686,24 +688,24 @@ var chart = AmCharts.makeChart( "main_chart2", {
     "periods": [ {
         "period": "DD",
         "count": 10,
-        "label": "10D"
+        "label": "5m"
       }, {
         "period": "MM",
         "count": 1,
-        "label": "1M"
+        "label": "15m"
       }, {
         "period": "MM",
         "count": 6,
-        "label": "6M"
+        "label": "30m"
       }, {
         "period": "YYYY",
         "count": 1,
-        "label": "1Y"
+        "label": "1h"
       }, {
         "period": "YYYY",
         "count": 2,
         "selected": true,
-        "label": "2Y"
+        "label": "4h"
       },
       /* {
            "period": "YTD",
@@ -719,3 +721,8 @@ var chart = AmCharts.makeChart( "main_chart2", {
 
 
 </script>
+<style type="text/css">
+	a[title="JavaScript charts"]{
+		display: none;
+	}
+</style>
