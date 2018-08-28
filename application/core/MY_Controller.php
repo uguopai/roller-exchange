@@ -48,7 +48,7 @@ class BaseController extends CI_Controller{
     }
 
 	public function checkAccess(){
-		if(!$this->is_login() || !$this->is_verify2fa()){
+		if(!$this->is_login()){
 			$this->go(false,"access/login");
 		}
 		return true;
@@ -122,7 +122,7 @@ class BaseController extends CI_Controller{
 
 	public function api_setup(){
 		
-		$config['server'] = "http://localhost:4444/api/";
+		$config['server'] = "http://127.0.0.1:4444/api/";
 		$config['send_cookies'] = "";
 		$config['api_name'] = "";
 		$config['api_key'] = "";
@@ -157,10 +157,7 @@ class AccountController extends BaseController{
 		parent::__construct();
 		
 		$login = $this->apis->post("account/checklogin");
-		if(!isset($login->status) || $login->status != "login"){
-			redirect(store_url("access/logout"));
-			exit();
-		}
+		//print_r($login);
 		
 	}
 }

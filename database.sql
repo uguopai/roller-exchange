@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 24, 2018 at 01:52 PM
+-- Generation Time: Aug 28, 2018 at 04:36 PM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.8
 
@@ -22,8 +22,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `account` (
   `id` int(10) NOT NULL,
+  `api_validate_id` int(10) NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `apikey` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `apisecret` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `status` int(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -38,8 +40,8 @@ CREATE TABLE `account` (
 -- Dumping data for table `account`
 --
 
-INSERT INTO `account` (`id`, `email`, `password`, `token`, `status`, `created_at`, `updated_at`, `aglo`, `validate_f2a_code`, `validate_email`, `hash`) VALUES
-(1, 'thietkewebvip@gmail.com', 'a131b831377a7ecb892750b1c2d118aaeca47647', 'tokenID', 1, '2018-07-07 15:58:55', '0000-00-00 00:00:00', 'sha256', '', 0, '$2y$10$o/KuLZwe1pmQj9QowWCLAu/pq9OJ7Ti82P4vrh5OuH7CN1g6VAlCm');
+INSERT INTO `account` (`id`, `api_validate_id`, `email`, `apikey`, `apisecret`, `token`, `status`, `created_at`, `updated_at`, `aglo`, `validate_f2a_code`, `validate_email`, `hash`) VALUES
+(3, 1, 'thietkewebvip@gmail.com', '', '', '', 0, '2018-08-26 05:36:07', '0000-00-00 00:00:00', '', '', 0, '');
 
 -- --------------------------------------------------------
 
@@ -118,7 +120,9 @@ INSERT INTO `symbol` (`id`, `icon`, `name`, `symbol`, `base`, `status`) VALUES
 --
 ALTER TABLE `account`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `email` (`apikey`),
+  ADD UNIQUE KEY `api_id` (`api_validate_id`),
+  ADD UNIQUE KEY `email_2` (`email`);
 
 --
 -- Indexes for table `admin`
@@ -148,7 +152,7 @@ ALTER TABLE `symbol`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `admin`
 --

@@ -22,7 +22,7 @@ class Dashboard extends HomeController {
 	{
 		$data = $this->db->get("symbol")->result();
 		
-		$this->view('exchange_main',["data" => $data]);
+		$this->view('home',["data" => $data]);
 	}
 
 	public function exchange($base, $pair)

@@ -38,6 +38,11 @@
   <script type="text/javascript" language="javascript" charset="utf-8" src="<?php echo resource_url("bootstrap-notify.js");?>"></script>
   <link rel="stylesheet" type="text/css" media="all" href="<?php echo resource_url("flipclock.css");?>">
   <script src='//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.4/socket.io.min.js'></script>
+
+  <meta name="google-site-verification" content="M329jGz1izszNrlin_lnP_ssu8VrX0rRvwve1L8sVhk" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/v4-shims.css">
+
 </head>
 <body>
 <header>
@@ -107,10 +112,11 @@
 	  </div>
 	</nav>
 </header>
-	<main ruller="main" class="container-fluid">
-		<?php echo $flash;?>
-		<?php print_r($content);?>
-	</main>
+<main ruller="main">
+	<?php echo $flash;?>
+	<?php print_r($content);?>
+</main>
+
 	<footer>
 		<div class="container">
 			<div class="row">

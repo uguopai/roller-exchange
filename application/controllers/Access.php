@@ -23,29 +23,30 @@ class Access extends AccessController {
 		$email = $this->input->post("email");
 		$password = $this->input->post("password");
 		$data = $this->apis->post("public/login",["email" => $email, "password" => $password]);
-        
+        //print_r($data);
 		if($data){
 			if(isset($data->id) && intval($data->id) > 0){
 			    $user = $this->db->get_where("account",["id" => $data->id])->row();
-				$this->session->set_userdata(["is_login" => $data->id,"session_id" => @$data->session_id]);
+				//$this->session->set_userdata(["is_login" => $data->id,"session_id" => @$data->session_id]);
 
-			    if ($user->validate_f2a_code != null && $user->validate_f2a_code != "")
+			    if (isset($user->validate_f2a_code) && $user->validate_f2a_code != null && $user->validate_f2a_code != "")
                 {
                     $this->session->set_userdata(["is_2fa" => true]);
                     redirect(store_url("access/verify2fa"));
                 }
                 else
                 {
-                    $this->session->set_userdata(["is_2fa" => false]);
-				$this->flash("success", lang("success_login"));
-				redirect(store_url("account"));
+                    //$this->session->set_userdata(["is_2fa" => false]);
+                    $this->session->set_userdata(["is_login" => $data->id,"session_id" => @$data->session_id]);
+    				$this->flash("success", lang("success_login"));
+    				redirect(store_url("account"));
                 }
 			}else{
 				$this->flash("error", lang("error_login"));
 				redirect(store_url("access/login"));
 			}
 		}
-		print_r($data);
+		
 	}
 
 

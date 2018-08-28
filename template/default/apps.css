@@ -89,7 +89,7 @@ header .dropdown-menu{
 
 
 .slider{
-	background: #293456;
+	background: #3797db;
 	height: 600px;
 	position: relative;
 	text-align: center;
@@ -257,8 +257,11 @@ header .dropdown-menu{
 
 
 main{
-	padding-top: 30px;
-	padding-bottom: 50px;
+
+}
+
+#features .card{
+	border:0px;
 }
 footer{
 	background-color: #f3f3f3;

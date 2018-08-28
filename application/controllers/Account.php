@@ -5,7 +5,7 @@ class Account extends AccountController {
 	function __construct()
 	{
 		parent::__construct();
-		//$this->checkAccess();
+		$this->checkAccess();
 
 	}
 	public function index(){
@@ -28,16 +28,27 @@ class Account extends AccountController {
 		$apis = $this->apis->post("account/wallet");
 
 		$arv = [];
-		$arv["BTC"] = new stdClass();
-		$arv["BTC"]->name = "Bitcoin";
-		$arv["BTC"]->symbol = "BTC";
-		$arv["BTC"]->wallet = $apis->BTC->btc_address;
-		$arv["BTC"]->main_amount = $apis->BTC->btc_amount;
-		$arv["BTC"]->deposit_amount = $apis->BTC->btc_deposit;
-		$arv["BTC"]->trade_amount_avalible = $apis->BTC->btc_trade_avalible;
-		$arv["BTC"]->trade_amount_block = $apis->BTC->btc_block_balancer;
-		$arv["BTC"]->status = ($apis->BTC->server && $apis->BTC->status == 1 ? 1 : 0);
-		 
+		if(isset($apis->BTC)){
+			$arv["BTC"] = new stdClass();
+			$arv["BTC"]->name = "Bitcoin";
+			$arv["BTC"]->symbol = "BTC";
+			$arv["BTC"]->wallet = $apis->BTC->btc_address;
+			$arv["BTC"]->main_amount = $apis->BTC->btc_amount;
+			$arv["BTC"]->deposit_amount = $apis->BTC->btc_deposit;
+			$arv["BTC"]->trade_amount_avalible = $apis->BTC->btc_trade_avalible;
+			$arv["BTC"]->trade_amount_block = $apis->BTC->btc_block_balancer;
+			$arv["BTC"]->status = ($apis->BTC->server && $apis->BTC->status == 1 ? 1 : 0);
+		}else{
+			$arv["BTC"] = new stdClass();
+			$arv["BTC"]->name = "Bitcoin";
+			$arv["BTC"]->symbol = "BTC";
+			$arv["BTC"]->wallet = "N/A";
+			$arv["BTC"]->main_amount = 0;
+			$arv["BTC"]->deposit_amount = 0;
+			$arv["BTC"]->trade_amount_avalible = 0;
+			$arv["BTC"]->trade_amount_block = 0;
+			$arv["BTC"]->status = 0;
+		}
 		foreach ($data as $key => $value) {
 			$arv[$value->symbol] = $value;
 			$arv[$value->symbol]->wallet = @$apis->{$value->symbol}->alt_address;
