@@ -45,7 +45,7 @@ class Access extends AccessController {
 				redirect(store_url("access/login"));
 			}
 		}
-		
+		print_r($data);
 	}
 
 
