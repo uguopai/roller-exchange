@@ -123,14 +123,7 @@ class BaseController extends CI_Controller{
 	public function api_setup(){
 		
 		$config['server'] = "http://127.0.0.1:4444/api/";
-		$config['send_cookies'] = "";
-		$config['api_name'] = "";
-		$config['api_key'] = "";
-		$config['http_auth'] = "";
-		$config['http_user'] = "";
-		$config['http_pass'] = "";
-		$config['ssl_verify_peer'] = "";
-		$config['ssl_cainfo'] = "";
+		
 		$this->apis->initialize($config);
         
 	}

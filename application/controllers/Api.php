@@ -20,13 +20,13 @@ class Api extends HomeController {
 		$this->toJson();
 	}
 
-	public function buy($b,$s){
-		$this->json = $this->apis->post("account/buy",["base" =>$b, "symbol" => $s,"amount" => $this->input->post("amount"),"prices" => $this->input->post("prices")]);
+	public function buy($base,$symbol){
+		$this->json = $this->apis->post("account/buy",["base" =>$base, "symbol" => $symbol,"amount" => $this->input->post("amount"),"prices" => $this->input->post("prices")]);
 		$this->toJson();
 	}
 
-	public function sell($b,$s){
-		$this->json = $this->apis->post("account/sell",["base" =>$b, "symbol" => $s,"amount" => $this->input->post("amount"),"prices" => $this->input->post("prices")]);
+	public function sell($base,$symbol){
+		$this->json = $this->apis->post("account/sell",["base" =>$base, "symbol" => $symbol,"amount" => $this->input->post("amount"),"prices" => $this->input->post("prices")]);
 		$this->toJson();
 	}
 
@@ -38,22 +38,15 @@ class Api extends HomeController {
 
 	public function chart(){
 		$arv = [];
-		$data = $this->apis->get("market/ohlc",["period" => "1m","base" => $this->session->userdata("base"),"symbol" => $this->session->userdata("symbol"),"limit" => 100]);
+		$data = $this->apis->get("market/ohlc",["period" => "15m","base" => $this->session->userdata("base"),"symbol" => $this->session->userdata("symbol"),"limit" => 100]);
 		$open = 0;
 		foreach ($data as $key => $value) {
 			$value->openTime = $value->created * 1000;
 			
-			$arv[] = $value;
+			$arv[] = [$value->created * 1000, $value->open, $value->high, $value->low, $value->close, $value->volume];
 
 		}
-		if(count($arv) < 100){
-			for ($i=0; $i < 100; $i++) { 
-				if($i > count($arv)){
-					$arv[$i] = new stdClass();
-					$arv[$i]->openTime = null;
-				}
-			}
-		}
+		
 		rsort($arv);
 		header("Content-type: application/json; charset=utf-8");
 		print_r(json_encode($arv));
