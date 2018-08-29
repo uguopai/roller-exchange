@@ -54,7 +54,7 @@
 			<nav>
 			  <div class="nav nav-tabs" id="nav-tab" role="tablist">
 			  	
-			  	<a class="nav-item flex-sm-fill nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" title="Favorites"><i class="ti-star"></i></a>
+			  	<a class="nav-item flex-sm-fill nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" title="Favorites"><i class="fas fa-star"></i></a>
 			  	<?php 
 			  	$i = 0;
 			  	foreach ($data as $key => $value) { 
@@ -83,7 +83,7 @@
 					<table class="table">
 						<?php foreach ($value as $key_alt => $value_alt) { ?>
 							<tr id="coind_<?php echo $key.$value_alt->symbol;?>">
-								<td width="2%"><i class="ti-star"></i></td>
+								<td width="2%"><i class="fas fa-star"></i></td>
 								<td><a href="<?php echo store_url("exchange/".$key."/".$value_alt->symbol);?>" title="<?php echo $value_alt->name;?>"><?php echo $value_alt->symbol;?></a></td>
 								<td>0</td>
 								<td class="text-right">0</td>
