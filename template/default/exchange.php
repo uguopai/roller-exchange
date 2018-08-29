@@ -60,7 +60,7 @@
 			  	foreach ($data as $key => $value) { 
 			  		$i++;
 			  	?>
-			    <a class="nav-item flex-sm-fill nav-link <?php echo ($base == $key ? "active" : "");?>" id="nav-home-tab" data-toggle="tab" href="#nav-trade-<?php echo strtolower($key);?>" role="tab" aria-controls="nav-home" aria-selected="true"><?php echo $key;?></a>
+			    <a class="nav-item flex-sm-fill nav-link <?php echo ($base == $key ? "active" : "");?>" id="nav-trade-<?php echo strtolower($key);?>-tab" data-toggle="tab" href="#nav-trade-<?php echo strtolower($key);?>" role="tab" aria-controls="nav-home" aria-selected="true"><?php echo $key;?></a>
 			    <?php } ?>
 			  </div>
 			</nav>
@@ -84,7 +84,7 @@
 						<?php foreach ($value as $key_alt => $value_alt) { ?>
 							<tr id="coind_<?php echo $key.$value_alt->symbol;?>">
 								<td width="2%"><i class="fas fa-star"></i></td>
-								<td><a href="<?php echo store_url("exchange/".$key."/".$value_alt->symbol);?>" title="<?php echo $value_alt->name;?>"><?php echo $value_alt->symbol;?></a></td>
+								<td><a href="<?php echo store_url("trade/".$key."/".$value_alt->symbol);?>" title="<?php echo $value_alt->name;?>"><?php echo $value_alt->symbol;?></a></td>
 								<td>0</td>
 								<td class="text-right">0</td>
 							</tr>
@@ -392,7 +392,7 @@ $.getJSON('/ohlcv.json', function (data) {
 <script type="text/javascript">//<![CDATA[
       $(function () {
         $.getJSON('/api/depth', function (data) {
-          console.log(data);
+         
 
           [ 'asks', 'bids' ].forEach(function (key) {
             data[key].forEach(function (pair) {

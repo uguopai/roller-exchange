@@ -60,7 +60,7 @@
 	      </li>
 	      
 	      <li class="nav-item">
-	        <a class="nav-link" href="<?php echo store_url("exchange");?>">Exchange</a>
+	        <a class="nav-link" href="<?php echo store_url("trade");?>">Exchange</a>
 	      </li>
 
 	      <li class="nav-item">

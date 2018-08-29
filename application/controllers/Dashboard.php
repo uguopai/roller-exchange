@@ -44,7 +44,7 @@ class Dashboard extends HomeController {
 		$symbol = $this->session->userdata("symbol");
 		if(!$base) $base = "BTC";
 		if(!$symbol) $symbol = "ROL";
-		redirect(store_url("exchange/".$base."/".$symbol));
+		redirect(store_url("trade/".$base."/".$symbol));
 	}
 
 	/*

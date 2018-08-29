@@ -52,5 +52,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['exchange'] = 'dashboard/exchange_main';
-$route['exchange/(:any)/(:any)'] = 'dashboard/exchange/$1/$2';
+$route['trade'] = 'dashboard/exchange_main';
+$route['trade/(:any)/(:any)'] = 'dashboard/exchange/$1/$2';
