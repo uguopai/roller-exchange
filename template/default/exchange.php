@@ -1,5 +1,5 @@
 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
@@ -385,6 +385,76 @@ $.getJSON('/ohlcv.json', function (data) {
 });
 
 </script>
+
+
+
+
+<script type="text/javascript">//<![CDATA[
+      $(function () {
+        $.getJSON('/api/depth', function (data) {
+          console.log(data);
+
+          [ 'asks', 'bids' ].forEach(function (key) {
+            data[key].forEach(function (pair) {
+              pair[0] = Number(pair[0]);
+              pair[1] = Number(pair[1]);
+            });
+          });
+
+          $('#depthchart').highcharts({
+            chart: {
+              type: 'area'
+            },
+            title: {
+              text: 'Market depth'
+            },
+            subtitle: {
+              text: ''
+            },
+            xAxis: {
+              allowDecimals: true,
+              labels: {
+                formatter: function () {
+                  return this.value; // clean, unformatted number for year
+                }
+              }
+            },
+            yAxis: {
+              title: {
+                text: 'Volume'
+              },
+              labels: {
+                formatter: function () {
+                  return this.value ;
+                }
+              }
+            },
+            tooltip: {
+              pointFormat: '{point.y} <?php echo $pair;?> at {point.x} <?php echo $base;?>'
+            },
+            plotOptions: {
+              area: {
+                marker: {
+                  enabled: false,
+                  symbol: 'circle',
+                  radius: 2,
+                  states: {
+                    hover: {
+                      enabled: true
+                    }
+                  }
+                }
+              }
+            },
+            exporting: { enabled: false },
+        	navigator : {enabled: false},
+            series: [{ name: 'ask', data: data.asks }, { name: 'bid', data: data.bids }]
+          });
+        });
+      });
+    //]]>
+
+    </script>
 <style type="text/css">
 	.highcharts-input-group, text.highcharts-credits{
 		display: none;

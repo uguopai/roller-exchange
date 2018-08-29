@@ -51,5 +51,10 @@ class Api extends HomeController {
 		header("Content-type: application/json; charset=utf-8");
 		print_r(json_encode($arv));
 	}
+	public function depth(){
+		$data = file_get_contents('https://api.binance.com/api/v1/depth?symbol=ETHBTC');
+		header("Content-type: application/json; charset=utf-8");
+		print_r($data);
+	}
 }
 ?>
