@@ -34,9 +34,9 @@
   <link rel="stylesheet" type="text/css" media="all" href="<?php echo template_url("apps.css");?>">
   <script type="text/javascript" language="javascript" charset="utf-8" src="<?php echo template_url("apps.js");?>"></script>
   
-  <script type="text/javascript" language="javascript" charset="utf-8" src="<?php echo resource_url("flipclock.min.js");?>"></script>
+  
   <script type="text/javascript" language="javascript" charset="utf-8" src="<?php echo resource_url("bootstrap-notify.js");?>"></script>
-  <link rel="stylesheet" type="text/css" media="all" href="<?php echo resource_url("flipclock.css");?>">
+
   <script src='//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.4/socket.io.min.js'></script>
 
   <meta name="google-site-verification" content="M329jGz1izszNrlin_lnP_ssu8VrX0rRvwve1L8sVhk" />
@@ -47,7 +47,7 @@
 <body>
 <header>
 
-	<nav class="navbar navbar-expand-lg navbar-light">
+	<nav class="navbar navbar-expand-lg navbar-dark">
 	  <a class="navbar-brand" href="#">Smart Exchange</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>

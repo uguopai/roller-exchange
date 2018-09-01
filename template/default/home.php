@@ -1,24 +1,55 @@
+<script type="text/javascript" language="javascript" charset="utf-8" src="<?php echo resource_url("flipclock.min.js");?>"></script>
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo resource_url("flipclock.css");?>">
 
-<div class="slider">
-	<div class="container text-center">
-			<div class="head-intro text-center"><h1 class="block-title">Blockchain Assets Trading Platform</h1> 
+<style type="text/css">
 
-						<h4>
+</style>
+<div class="slider bg-primary">
+	<div class="container text-left">
+        <div class="row">
+            <div class="col-8 text-white">
+                <div class="head-intro"><h1 class="block-title">Smarts Trading Platform</h1> 
+
+                        <h4>
                             The first 300K registered members will be free of trading fees in the first year.
                             <br> With each member invited, you will receive an additional one month free trading fee.
                         </h4> 
                         <h2 class="mt-30">
                             Exchange Launch at:
                         </h2> 
-                        <div id="timewapper">
-	                        <div class="timer-wapper">
-	                        	
-	                        </div>
-                        </div>
+                            
+                            
+                </div>
+                <div id="timewapper">
+                    <div class="timer-wapper">
                         
+                    </div>
+                </div>
             </div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                          <div class="logoform"><img src="https://os.university/static/assets/icons/businesses.svg" style="width: 65px;"></div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                          </div>
+                          
+                          <button type="submit" class="btn btn-primary">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+			
 	</div>
-	<div class="slider-bg"></div>
+	
 </div>
 
 

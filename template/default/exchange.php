@@ -7,7 +7,7 @@
 <script src="https://code.highcharts.com/stock/indicators/pivot-points.js"></script>
 <script src="https://code.highcharts.com/stock/indicators/macd.js"></script>
 
-<div class="container-fluid">
+<div class="container">
 	<br>
 <div class="row">
 	<div class="col">
